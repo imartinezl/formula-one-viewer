@@ -50,13 +50,28 @@ export default class ErgastAPI {
             var datasets = [];
             var labels = [];
             let pointsData = {};
+            let fastlap = 1;
+            let scores = [25,18,15,12,10,8,6,4,2,1];
+            let input = document.getElementById("input1");
+            let value = parseInt(input.value);
+            console.log(value);
+            scores[0] = value;
             let races = data.MRData.RaceTable.Races
             for (let race = 0; race < races.length; race++) {
                 let raceLocationCountry = races[race].Circuit.Location.country;
                 let raceResults = races[race].Results;
                 for (let pos = 0; pos < raceResults.length; pos++) {
                     let driver = raceResults[pos].Driver.driverId;
-                    let points = parseInt(raceResults[pos].points);
+                    let position = parseInt(raceResults[pos].position);
+                    let points = 0;
+                    if(scores[position]){
+                        points = scores[position-1];
+                    }
+                    if(raceResults[pos].FastestLap){
+                        if(raceResults[pos].FastestLap.rank == "1"){
+                            points += fastlap;
+                        }
+                    }
                     if(! (driver in pointsData)){
                         pointsData[driver] = {};
                         pointsData[driver].total = 0;
