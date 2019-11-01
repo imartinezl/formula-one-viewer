@@ -3,27 +3,28 @@
 import Chart from 'chart.js';
 import config from '../config/appConfig';
 
-export default class Chartjs {
+export default class StandingsChart {
 
     constructor(){
-        this._canvas = document.getElementById('canvas');
+        this._canvas = document.getElementById('standings_canvas');
         this._ctx = this._canvas.getContext('2d');
+        this._config = this.baseConfig();
     }
 
     init(){
     
     }
 
-    updateData(data, labels){
+    updateData(standings, labels){
         let datasets = [];
-        for (var driverId in data) {
-            let constructors = data[driverId].constructorId;
+        for (var driverId in standings) {
+            let constructors = standings[driverId].constructorId;
             let currentConstructor = [...constructors].pop();
             let lineColor = config.constructorColor[currentConstructor];
             let pointColors = constructors.map(e => config.constructorColor[e])
             datasets.push({
                 label: driverId,
-                data: data[driverId].cumsum,
+                data: standings[driverId].cumsum,
                 pointBackgroundColor: pointColors,
                 borderColor: lineColor,
                 borderWidth: 1,
@@ -34,11 +35,12 @@ export default class Chartjs {
                 hoverBorderWidth: 3
             });
         }
-        this._config = this.baseConfig();
-        this._config.data = {datasets, labels};
+        
         if(this._chart){
-            this._chart.update();
+            this._chart.data = {datasets, labels};
+            this._chart.update({duration: 0});
         }else{
+            this._config.data = {datasets, labels};
             this._chart = new Chart(this._ctx, this._config);
         }
     }
