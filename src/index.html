@@ -11,26 +11,29 @@
 
 <body>
     <div id="app">
-        <section class="hero is-primary">
-        <div class="hero-body">
+    <section class="hero">
+            <div class="hero-body">
             <div class="container">
-            <h1 class="title">
-                Primary title
-            </h1>
-            <h2 class="subtitle">
-                Primary subtitle
-            </h2>
+                <h1 class="title">
+                Hero title
+                </h1>
+                <h2 class="subtitle">
+                Hero subtitle
+                </h2>
             </div>
-        </div>
+            </div>
         </section>
         <div class="columns">
             <div class="column is-two-fifths">
                 <div class="select is-primary is-rounded">
-                    <select id="select"></select>
+                    <select id="select-system"></select>
                 </div>
                 <canvas id="points_canvas" width="400px" height="300px"></canvas>
             </div>
             <div class="column">
+                <div class="select is-primary is-rounded">
+                    <select id="select-year"></select>
+                </div>
                 <canvas id="standings_canvas" width="400px" height="400px"></canvas>
             </div>
         </div>
