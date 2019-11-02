@@ -42,6 +42,7 @@ export default class FController {
     
     requestData(season) {
         this._ergastAPI.requestData(season).then((ergastData) => {
+            console.log(ergastData);
             this._standings.init(ergastData, this._scoresChart._scores, this._scoresChart._fastlap);
             this._scoresChart.setStandings(this._standings);
         });
