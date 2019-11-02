@@ -12,7 +12,7 @@ export default class ScoresChart {
       this._config = this.baseConfig();
       this._labels = [];
       this._scores = [];
-      this._select = document.getElementById('select');
+      this._select_system = document.getElementById('select-system');
     }
 
     init(){
@@ -26,20 +26,20 @@ export default class ScoresChart {
         let option = document.createElement('option');
         option.value = name;
         option.text = name;
-        this._select.add( option ) 
+        this._select_system.add( option ) 
       }
     }
     
     update(){
-      let years = this._select.value;
+      let years = this._select_system.value;
       this._labels = config.positions;
-      this._scores = config.pointSystem[years].scores;
+      this._scores = config.pointSystem[years].scores.slice();
       this._fastlap = config.pointSystem[years].fastlap;
       this.draw();
     }
 
     initEvents(){
-      this._select.addEventListener("change", () => {
+      this._select_system.addEventListener("change", () => {
         this.update();
         this._standings.updateScores(this._scores);
       });
@@ -58,14 +58,12 @@ export default class ScoresChart {
         this._chart = new Chart(this._ctx, this._config);
       }
     }
-
-
+    
     setStandings(s){
       this._standings = s;
     }
 
     onDragEnd(e, datasetIndex, index, value){
-      console.log(datasetIndex, index, value);
       this._scores[index] = value;
       this._standings.updateScores(this._scores);
     }
@@ -95,7 +93,7 @@ export default class ScoresChart {
             yAxes: [{
               ticks: {
                 max: 30,
-                min: 0
+                min: -1
               }
             }]
           }
