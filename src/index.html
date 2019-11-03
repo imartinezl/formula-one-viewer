@@ -11,15 +11,12 @@
 
 <body>
     <div id="app">
-    <div class="container is-fluid">
-        <section class="hero">
-            <div class="hero-body">
+        <div class="container is-fluid">
+            <section class="section">
                 <div class="container">
-                    <h1 class="title">
-                        Formula 1 Standings and Points Scoring Systems
-                    </h1>
+                    <h1 class="title">Formula 1 Standings and Points Scoring Systems</h1>
                     <h2 class="subtitle">
-                        Drag the bars to customize the points given to each position!
+                        Drag the bars to customize the points given to each position
                     </h2>
                     <div class="tags">
                         <span class="tag is-rounded">F1</span>
@@ -28,28 +25,38 @@
                         <span class="tag is-rounded">History</span>
                     </div>
                 </div>
-            </div>
-        </section>
-        <div class="columns is-mobile is-vcentered">
-            <div class="column">
-                <div class="select is-primary is-rounded">
-                    <select id="select-system"></select>
+            </section>
+
+            <div class="columns is-mobile is-vcentered">
+                <div class="column">
+                    <div class="box">
+                        <div class="level-left">
+                            <p class="level-item"><strong>Point Scoring System</strong></p>
+                            <div class="select is-primary is-rounded">
+                                <select id="select-system"></select>
+                            </div>
+                        </div>
+                        <div class="chart-container" style="position: relative; height:70vh; width:30vw">
+                            <canvas id="points_canvas"></canvas>
+                        </div>
+                    </div>
                 </div>
-                <div class="chart-container" style="position: relative; height:70vh; width:30vw">
-                    <canvas id="points_canvas"></canvas>
+                <div class="column">
+                    <div class="box">
+                        <div class="level-left">
+                            <p class="level-item"><strong>F1 Season</strong></p>
+                            <div class="select is-primary is-rounded">
+                                <select id="select-year"></select>
+                            </div>
+                        </div>
+                        <div class="chart-container" style="position: relative; height:70vh; width:60vw">
+                            <canvas id="standings_canvas"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="column">
-                <div class="select is-primary is-rounded">
-                    <select id="select-year"></select>
-                </div>
-                <div class="chart-container" style="position: relative; height:70vh; width:60vw">
-                    <canvas id="standings_canvas"></canvas>
-                </div>    
-            </div>
+
         </div>
-                
-    </div>
     </div>
 </body>
 
