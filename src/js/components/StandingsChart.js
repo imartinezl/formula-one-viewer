@@ -17,7 +17,6 @@ export default class StandingsChart {
 
     updateData(standings, labels){
         labels = labels.map(e => e.join(' '));
-        console.log(labels);
         let datasets = [];
         for (var driverId in standings) {
             let constructors = standings[driverId].constructorId;
@@ -57,6 +56,8 @@ export default class StandingsChart {
             },
             options: {
                 showLines: true,
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
                         scaleLabel: {

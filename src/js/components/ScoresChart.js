@@ -48,7 +48,14 @@ export default class ScoresChart {
     draw(){
       let labels = [...this._labels, "Fast Lap"];
       let datasets = [{
-        data: [...this._scores, this._fastlap]
+        data: [...this._scores, this._fastlap],
+        backgroundColor: "#FF1456",
+        borderColor: "#44AA22",
+        borderWidth: 0,
+        hoverBackgroundColor: "#000000",
+        barPercentage: 0.8,
+
+
       }];
       if(this._chart){
         this._chart.data = {datasets, labels};
@@ -58,7 +65,7 @@ export default class ScoresChart {
         this._chart = new Chart(this._ctx, this._config);
       }
     }
-    
+
     setStandings(s){
       this._standings = s;
     }
@@ -68,36 +75,70 @@ export default class ScoresChart {
       this._standings.updateScores(this._scores);
     }
 
+    onDragStart(e, datasetIndex, index, value){
+
+    }
+    onDrag(e, datasetIndex, index, value){
+      
+    }
+
     baseConfig(){
       var config = {
         type: 'bar',
         data: {
-          _labels: [],
+          labels: [],
           datasets: []
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           dragData: true,
           dragX: false,
           dragDataRound: 0,
-          onDragStart: function (e) {
-            //console.log("test");
-            //console.log(e.clientY)
-            //console.log(test.scales["y-axis-0"].getValueForPixel(e.clientY))
-          },
-          onDrag: function (e, datasetIndex, index, value) {
-            //console.log(e.clientY)
-          },
+          onDragStart: this.onDragStart.bind(this),
+          onDrag: this.onDrag.bind(this),
           onDragEnd: this.onDragEnd.bind(this),
           scales: {
-            yAxes: [{
+            xAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Position'
+              },
+              gridLines: {
+                display: true,
+              },
               ticks: {
+                autoSkip: false,
+                minRotation: 35,
+                maxRotation: 40
+              },
+            }],
+            yAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Points Awarded'
+              },
+              gridLines: {
+                display: true,
+              },
+              ticks: {
+                beginAtZero: true,
                 max: 30,
-                min: -1
+                min: 0,
               }
             }]
+          },
+          title: {
+              display: false,
+              text: 'Custom Chart Title'
+          },
+          legend: {
+              display: false,
+              labels: {
+                  fontColor: 'rgb(255, 99, 132)'
+              }
+          },
           }
-        }
       }
       return config;
     }

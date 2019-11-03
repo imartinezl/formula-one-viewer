@@ -11,32 +11,45 @@
 
 <body>
     <div id="app">
-    <section class="hero">
+    <div class="container is-fluid">
+        <section class="hero">
             <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                Hero title
-                </h1>
-                <h2 class="subtitle">
-                Hero subtitle
-                </h2>
-            </div>
+                <div class="container">
+                    <h1 class="title">
+                        Formula 1 Standings and Points Scoring Systems
+                    </h1>
+                    <h2 class="subtitle">
+                        Drag the bars to customize the points given to each position!
+                    </h2>
+                    <div class="tags">
+                        <span class="tag is-rounded">F1</span>
+                        <span class="tag is-rounded">Standings</span>
+                        <span class="tag is-rounded">Ranking</span>
+                        <span class="tag is-rounded">History</span>
+                    </div>
+                </div>
             </div>
         </section>
-        <div class="columns">
-            <div class="column is-two-fifths">
+        <div class="columns is-mobile is-vcentered">
+            <div class="column">
                 <div class="select is-primary is-rounded">
                     <select id="select-system"></select>
                 </div>
-                <canvas id="points_canvas" width="400px" height="300px"></canvas>
+                <div class="chart-container" style="position: relative; height:70vh; width:30vw">
+                    <canvas id="points_canvas"></canvas>
+                </div>
             </div>
             <div class="column">
                 <div class="select is-primary is-rounded">
                     <select id="select-year"></select>
                 </div>
-                <canvas id="standings_canvas" width="400px" height="400px"></canvas>
+                <div class="chart-container" style="position: relative; height:70vh; width:60vw">
+                    <canvas id="standings_canvas"></canvas>
+                </div>    
             </div>
         </div>
+                
+    </div>
     </div>
 </body>
 
