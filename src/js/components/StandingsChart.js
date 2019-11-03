@@ -16,6 +16,8 @@ export default class StandingsChart {
     }
 
     updateData(standings, labels){
+        labels = labels.map(e => e.join(' '));
+        console.log(labels);
         let datasets = [];
         for (var driverId in standings) {
             let constructors = standings[driverId].constructorId;
@@ -59,31 +61,32 @@ export default class StandingsChart {
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Month'
+                            labelString: 'Grand Prix'
                         },
                         gridLines: {
-                            display: false,
+                            display: true,
                         },
                         ticks: {
                             autoSkip: false,
-                            maxRotation: 0
+                            minRotation: 35,
+                            maxRotation: 40
                         },
                     }],
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Month'
+                            labelString: 'Points'
+                        },
+                        gridLines: {
+                            display: true,
                         },
                         ticks: {
                             beginAtZero: true
-                        },
-                        gridLines: {
-                            display: false,
                         }
                     }]
                 },
                 title: {
-                    display: true,
+                    display: false,
                     text: 'Custom Chart Title'
                 },
                 legend: {
