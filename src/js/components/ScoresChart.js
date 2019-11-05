@@ -125,12 +125,14 @@ export default class ScoresChart {
                 beginAtZero: true,
                 max: 30,
                 min: 0,
+                fontColor: 'red',
+                fontFamily: 'F1-Regular'
               }
             }]
           },
           title: {
               display: false,
-              text: 'Custom Chart Title'
+              text: 'Custom Chart Title',
           },
           legend: {
               display: false,

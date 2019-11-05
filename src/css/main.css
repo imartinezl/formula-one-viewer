@@ -15,3 +15,24 @@ html, body, #app {
         display: block;
     }
 }
+
+@font-face {
+    font-family: F1-Regular;
+    src: url("../assets/Formula1-Regular.ttf") format("opentype");
+}
+@font-face {
+    font-family: F1-Bold;
+    src: url("../assets/Formula1-Bold.ttf") format("opentype");
+}
+@font-face {
+    font-family: F1-Black;
+    src: url("../assets/Formula1-Black.ttf") format("opentype");
+}
+@font-face {
+    font-family: F1-Wide;
+    src: url("../assets/Formula1-Wide.ttf") format("opentype");
+}
+
+p {
+    font-family: 'F1-Bold', 'Roboto', sans-serif;
+  }
