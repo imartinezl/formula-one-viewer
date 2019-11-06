@@ -43,16 +43,19 @@ body,
     font-family: 'F1-Bold', 'Roboto', sans-serif;
     font-size: 20pt;
     color: #ffffff;
+    padding-top: 15pt;
 }
 
 #subtitle {
     font-family: 'F1-Bold', 'Roboto', sans-serif;
     /* color: #ffffff; */
     font-size: 10pt;
-    padding-bottom: 10pt;
+    margin-bottom: 10pt;
 }
 
 #logo {
+    float: left;
+    padding-right: 10pt;
     width: 200px;
 }
 
