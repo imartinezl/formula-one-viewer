@@ -52,7 +52,7 @@ export default class ScoresChart {
             backgroundColor: "#e10600",
             borderColor: "#44AA22",
             borderWidth: 0,
-            hoverBackgroundColor: "#000000",
+            hoverBackgroundColor: "#ff5c58",
             barPercentage: 0.8,
 
 
@@ -102,7 +102,9 @@ export default class ScoresChart {
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Position'
+                            labelString: 'Position',
+                            fontFamily: 'F1-Regular',
+                            fontSize: 12
                         },
                         gridLines: {
                             display: true,
@@ -110,13 +112,17 @@ export default class ScoresChart {
                         ticks: {
                             autoSkip: false,
                             minRotation: 35,
-                            maxRotation: 40
+                            maxRotation: 40,
+                            fontFamily: 'F1-Regular',
+                            fontSize: 12
                         },
                     }],
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Points Awarded'
+                            labelString: 'Points Awarded',
+                            fontFamily: 'F1-Regular',
+                            fontSize: 12
                         },
                         gridLines: {
                             display: true,
@@ -125,9 +131,8 @@ export default class ScoresChart {
                             beginAtZero: true,
                             max: 30,
                             min: 0,
-                            fontColor: '#e10600',
                             fontFamily: 'F1-Regular',
-                            fontSize: 15
+                            fontSize: 12
                         }
                     }]
                 },
@@ -141,6 +146,9 @@ export default class ScoresChart {
                         fontColor: '#e10600'
                     }
                 },
+                tooltips: {
+                    enabled: false,
+                }
             }
         }
         return config;

@@ -62,7 +62,9 @@ export default class StandingsChart {
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Grand Prix'
+                            labelString: 'Grand Prix',
+                            fontFamily: 'F1-Regular',
+                            fontSize: 12
                         },
                         gridLines: {
                             display: true,
@@ -70,19 +72,25 @@ export default class StandingsChart {
                         ticks: {
                             autoSkip: false,
                             minRotation: 35,
-                            maxRotation: 40
+                            maxRotation: 40,
+                            fontFamily: 'F1-Regular',
+                            fontSize: 12
                         },
                     }],
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Points'
+                            labelString: 'Points',
+                            fontFamily: 'F1-Regular',
+                            fontSize: 12
                         },
                         gridLines: {
                             display: true,
                         },
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            fontFamily: 'F1-Regular',
+                            fontSize: 12
                         }
                     }]
                 },
@@ -96,6 +104,11 @@ export default class StandingsChart {
                         fontColor: 'rgb(255, 99, 132)'
                     }
                 },
+                tooltips: {
+                    enabled: true,
+                    intercept: false,
+                    
+                }
                 
             }
         };
