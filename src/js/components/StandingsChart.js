@@ -16,6 +16,7 @@ export default class StandingsChart {
     }
 
     updateData(standings, labels){
+        console.log(standings);
         labels = labels.map(e => e.join(' '));
         let datasets = [];
         for (var driverId in standings) {
@@ -107,7 +108,21 @@ export default class StandingsChart {
                 tooltips: {
                     enabled: true,
                     intercept: false,
-                    
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    titleFontFamily: 'F1-Regular',
+                    titleAlign: 'center',
+                    bodyFontFamily: 'F1-Regular',
+                    bodyAlign: 'center',
+                    xPadding: 10,
+                    yPadding: 10,
+                    cornerRadius: 3,
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var item = data.datasets[tooltipItem.datasetIndex];
+                            // console.log(tooltipItem)
+                            return item.label + ': ' + (tooltipItem.yLabel)
+                        }
+                    }
                 }
                 
             }
