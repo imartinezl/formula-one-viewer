@@ -14,6 +14,7 @@ export default class Standings {
         this.races = ergastData.MRData.RaceTable.Races;
         this.scores = scores;
         this.fastlap = fastlap;
+        this.standingsChart.init();
         this.update();
     }
 

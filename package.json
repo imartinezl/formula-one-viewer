@@ -37,6 +37,7 @@
     "bulma": "^0.7.5",
     "chart.js": "^2.9.0",
     "chartjs-plugin-dragdata": "^1.0.4",
+    "chartjs-plugin-zoom": "^0.7.5",
     "country-emoji": "^1.5.0",
     "lodash": "^4.17.15"
   }

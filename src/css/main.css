@@ -54,9 +54,21 @@ body,
 }
 
 #logo {
-    float: left;
+    
     padding-right: 10pt;
     width: 200px;
+}
+#github-button {
+    width: 32px;
+    height: 32px;
+    right: 0px;
+}
+
+#reset-zoom{
+    position: absolute;
+    left: 70pt;
+    top: 12pt;
+    display: none;   
 }
 
 p{
@@ -77,10 +89,4 @@ p{
     padding-top: 20pt;
     padding-bottom: 20pt;
     margin-bottom: 10pt;
-}
-
-#github-button {
-    position: absolute;
-    right: 0px;
-    top: 0px;
 }

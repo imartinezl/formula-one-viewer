@@ -1,21 +1,47 @@
 "use strict";
 
-import Chart from 'chart.js';
 import config from '../config/appConfig';
+import Chart from 'chart.js';
+import 'chartjs-plugin-zoom';
 
 export default class StandingsChart {
 
-    constructor(){
+    constructor() {
         this._canvas = document.getElementById('standings_canvas');
         this._ctx = this._canvas.getContext('2d');
         this._config = this.baseConfig();
+
+        this._resetZoom = document.getElementById('reset-zoom');
     }
 
-    init(){
+    init() {
+        this.initEvents();
+    }
     
+    initEvents(){
+        this._resetZoom.addEventListener("click", () => {
+            if (this._chart) {
+                this._chart.resetZoom();
+                this.hideZoomButton();
+            }
+        });
+    }
+    
+    onZoomComplete(chart){
+        this.displayZoomButton();
     }
 
-    updateData(standings, labels){
+    hideZoomButton(){
+        this._resetZoom.style.display = 'none';
+    }
+    
+    displayZoomButton(){
+        this._resetZoom.style.display = 'block';
+    }
+
+    
+
+    updateData(standings, labels) {
         console.log(standings);
         labels = labels.map(e => e.join(' '));
         let datasets = [];
@@ -29,26 +55,27 @@ export default class StandingsChart {
                 data: standings[driverId].cumsum,
                 pointBackgroundColor: pointColors,
                 borderColor: lineColor,
-                borderWidth: 1,
+                borderWidth: 1.5,
                 fill: false,
                 tension: 0,
                 radius: 2,
                 pointStyle: 'circle',
-                hoverBorderWidth: 3
+                hoverBorderWidth: 3,
+                pointHoverBorderWidth: 5
             });
         }
-        
-        if(this._chart){
-            this._chart.data = {datasets, labels};
-            this._chart.update({duration: 0});
-        }else{
-            this._config.data = {datasets, labels};
+
+        if (this._chart) {
+            this._chart.data = { datasets, labels };
+            this._chart.update({ duration: 0 });
+        } else {
+            this._config.data = { datasets, labels };
             this._chart = new Chart(this._ctx, this._config);
         }
     }
 
 
-    baseConfig(){
+    baseConfig() {
         var config = {
             type: 'line',
             data: {
@@ -108,7 +135,7 @@ export default class StandingsChart {
                 tooltips: {
                     enabled: true,
                     intercept: false,
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
                     titleFontFamily: 'F1-Regular',
                     titleAlign: 'center',
                     bodyFontFamily: 'F1-Regular',
@@ -117,15 +144,25 @@ export default class StandingsChart {
                     yPadding: 10,
                     cornerRadius: 3,
                     callbacks: {
-                        label: function(tooltipItem, data) {
+                        label: function (tooltipItem, data) {
                             var item = data.datasets[tooltipItem.datasetIndex];
                             // console.log(tooltipItem)
                             return item.label + ': ' + (tooltipItem.yLabel)
                         }
                     }
-                }
-                
-            }
+                },
+                pan: {
+                    enabled: false,
+                },
+                zoom: {
+                    enabled: true,
+                    drag: true,
+                    mode: 'xy',
+                    speed: 0.05,
+                    onZoomComplete: this.onZoomComplete.bind(this),
+                },
+
+            },
         };
         return config;
     }
