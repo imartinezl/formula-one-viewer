@@ -41,20 +41,18 @@ body,
 
 #title {
     font-family: 'F1-Bold', 'Roboto', sans-serif;
-    font-size: 20pt;
+    font-size: 18pt;
     color: #ffffff;
     padding-top: 15pt;
 }
 
 #subtitle {
     font-family: 'F1-Bold', 'Roboto', sans-serif;
-    /* color: #ffffff; */
     font-size: 10pt;
     margin-bottom: 10pt;
 }
 
 #logo {
-    
     padding-right: 10pt;
     width: 200px;
 }
@@ -68,11 +66,33 @@ body,
     position: absolute;
     left: 70pt;
     top: 12pt;
-    display: none;   
+    display: none;
+    
+}
+
+#progress-bar{
+    height: 70vh;
+    width: 60vw;
+    padding-top: 32vh;
+    padding-left: 25vw;
+    padding-right: 25vw;
+    z-index: 100;
+    position: absolute;
+    background-color: rgba(255,255,255,0.8);
+    -webkit-animation: fade .3s ease-out;
+    -moz-animation: fade .3s ease-out;
+}
+@-webkit-keyframes fade {
+    0% { opacity: 0 }   
+  100% { opacity: 1 }
+}
+@-moz-keyframes fade {
+    0% { opacity: 0 }   
+  100% { opacity: 1 }
 }
 
 p{
-    font-family: 'F1-Regular', 'Roboto', sans-serif;
+    font-family: 'F1-Bold', 'Roboto', sans-serif;
     font-size: 10pt;
 }
 
