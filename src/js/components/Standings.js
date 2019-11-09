@@ -40,6 +40,7 @@ export default class Standings {
 
     processRace(race){
         race.Results.map( e => this.processPosition(e));
+        this.fillEmptyDrivers();
         this.labels.push(this.getRaceLabel(race.Circuit));
     }
     processPosition(result){
@@ -48,6 +49,7 @@ export default class Standings {
         let constructorId = result.Constructor.constructorId;
         this.initDriver(driverId);
         this.addPoints(driverId, constructorId, points);
+        
     }
     
     initDriver(driverId){
@@ -60,6 +62,7 @@ export default class Standings {
             };
         }
     }
+
     addPoints(driverId, constructorId, points){
         this.standings[driverId].constructorId.push(constructorId);
         this.standings[driverId].total += points;
@@ -83,5 +86,19 @@ export default class Standings {
         let raceLocationCountry = raceCircuit.Location.country;
         let emoji = flag(raceLocationCountry);
         return [raceLocationCountry, emoji];
+    }
+
+    fillEmptyDrivers(){
+        // TO-DO:
+        // get number of races (maximum of constructorId, for instance)
+        // for each driverId, if array is not full, add one element to 
+        // - constructorId: same as previous
+        // - cumsum: add 0
+        // - perRace: add 0
+
+        this.standings[driverId].constructorId.push(constructorId);
+        this.standings[driverId].total += points;
+        this.standings[driverId].cumsum.push(this.standings[driverId].total);
+        this.standings[driverId].perRace.push(points);
     }
 }
