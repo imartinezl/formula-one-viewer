@@ -33,8 +33,8 @@
                 <div class="column">
                     <div class="box">
                         <div class="level-left">
-                            <p class="level-item"><strong>Point Scoring System</strong></p>
-                            <div class="select is-danger is-rounded">
+                            <p class="level-item">Scoring System</p>
+                            <div class="select is-danger is-rounded is-small">
                                 <select id="select-system"></select>
                             </div>
                         </div>
@@ -46,10 +46,13 @@
                 <div class="column">
                     <div class="box">
                         <div class="level-left">
-                            <p class="level-item"><strong>F1 Season</strong></p>
-                            <div class="select is-danger is-rounded">
+                            <p class="level-item">F1 Season</p>
+                            <div class="select is-danger is-rounded is-small">
                                 <select id="select-year"></select>
                             </div>
+                        </div>
+                        <div id="progress-bar" class="container">
+                            <progress class="progress is-danger is-small" max="100">30%</progress>
                         </div>
                         <div class="chart-container" style="position: relative; height:70vh; width:60vw">
                             <button id="reset-zoom" class="button is-rounded is-small">Reset Zoom</button>
