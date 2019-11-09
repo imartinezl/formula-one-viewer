@@ -25,7 +25,9 @@ export default class Standings {
 
     update(){
         this.reset();
-        this.races.map(race => this.processRace(race));
+        this.races.map((race, index) => this.processRace(race, index));
+        // fix empty drivers
+        console.log(this.races.length)
         this.standingsChart.updateData(this.standings, this.labels);
     }
 
@@ -38,17 +40,16 @@ export default class Standings {
         this.update();
     }
 
-    processRace(race){
-        race.Results.map( e => this.processPosition(e));
-        this.fillEmptyDrivers();
+    processRace(race, index){
+        race.Results.map( e => this.processPosition(e, index));
         this.labels.push(this.getRaceLabel(race.Circuit));
     }
-    processPosition(result){
+    processPosition(result, index){
         let points = this.calculatePoints(result);
         let driverId = result.Driver.driverId;
         let constructorId = result.Constructor.constructorId;
         this.initDriver(driverId);
-        this.addPoints(driverId, constructorId, points);
+        this.addPoints(driverId, constructorId, points, index);
         
     }
     
@@ -58,12 +59,14 @@ export default class Standings {
                 constructorId: [], 
                 total: 0, 
                 cumsum: [], 
-                perRace: []
+                perRace: [],
+                index: [],
             };
         }
     }
 
-    addPoints(driverId, constructorId, points){
+    addPoints(driverId, constructorId, points, index){
+        this.standings[driverId].index.push(index);
         this.standings[driverId].constructorId.push(constructorId);
         this.standings[driverId].total += points;
         this.standings[driverId].cumsum.push(this.standings[driverId].total);
@@ -88,6 +91,10 @@ export default class Standings {
         return [raceLocationCountry, emoji];
     }
 
+    pushLast(x){
+        x.push(x[x.length-1])
+    }
+
     fillEmptyDrivers(){
         // TO-DO:
         // get number of races (maximum of constructorId, for instance)
@@ -95,10 +102,26 @@ export default class Standings {
         // - constructorId: same as previous
         // - cumsum: add 0
         // - perRace: add 0
+        var nraces = this.races.length;
+        console.log(nraces);
+        for (var driverId in this.standings) {
+            pos = 0;
+            index = 0;
+            while(pos < nraces){
+                if(this.standings[driverId].index[pos] == index){
+                    pos++;
+                    index++;
+                }else{
+                    this.standings[driverId].index.aplice(pos, 0, index)
+                    index++;
+                }
+            }
+            // if(n < nraces){
+            //     this.pushLast(this.standings[driverId].constructorId);
+            //     this.standings[driverId].cumsum.push(this.standings[driverId].total);
+            //     this.standings[driverId].perRace.push(0);
+            // }
+        }
 
-        this.standings[driverId].constructorId.push(constructorId);
-        this.standings[driverId].total += points;
-        this.standings[driverId].cumsum.push(this.standings[driverId].total);
-        this.standings[driverId].perRace.push(points);
     }
 }
