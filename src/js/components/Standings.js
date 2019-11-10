@@ -27,6 +27,7 @@ export default class Standings {
         this.reset();
         this.races.map((race, index) => this.processRace(race, index));
         // fix empty drivers
+        this.fillEmptyDrivers();
         console.log(this.races.length)
         this.standingsChart.updateData(this.standings, this.labels);
     }
@@ -96,31 +97,25 @@ export default class Standings {
     }
 
     fillEmptyDrivers(){
-        // TO-DO:
-        // get number of races (maximum of constructorId, for instance)
-        // for each driverId, if array is not full, add one element to 
-        // - constructorId: same as previous
-        // - cumsum: add 0
-        // - perRace: add 0
         var nraces = this.races.length;
         console.log(nraces);
+
         for (var driverId in this.standings) {
-            pos = 0;
-            index = 0;
-            while(pos < nraces){
-                if(this.standings[driverId].index[pos] == index){
-                    pos++;
-                    index++;
-                }else{
-                    this.standings[driverId].index.aplice(pos, 0, index)
-                    index++;
+            
+            for (let index = 0; index < nraces; index++) {
+                if(this.standings[driverId].index[index] != index){
+                    this.standings[driverId].index.splice(index, 0, index);
+                    this.standings[driverId].constructorId.splice(index, 0, this.standings[driverId].constructorId[0]);
+                    this.standings[driverId].perRace.splice(index, 0, 0);
                 }
             }
-            // if(n < nraces){
-            //     this.pushLast(this.standings[driverId].constructorId);
-            //     this.standings[driverId].cumsum.push(this.standings[driverId].total);
-            //     this.standings[driverId].perRace.push(0);
-            // }
+            this.standings[driverId].cumsum = [];
+            let cumsum = 0;
+            for (let index = 0; index < nraces; index++) {
+                cumsum += this.standings[driverId].perRace[index];
+                this.standings[driverId].cumsum.push(cumsum);
+            }
+
         }
 
     }
