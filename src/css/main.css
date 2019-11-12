@@ -21,22 +21,22 @@ body,
 
 @font-face {
     font-family: F1-Regular;
-    src: url("../assets/Formula1-Regular.ttf") format("opentype");
+    src: url("../fonts/Formula1-Regular.ttf") format("opentype");
 }
 
 @font-face {
     font-family: F1-Bold;
-    src: url("../assets/Formula1-Bold.ttf") format("opentype");
+    src: url("../fonts/Formula1-Bold.ttf") format("opentype");
 }
 
 @font-face {
     font-family: F1-Black;
-    src: url("../assets/Formula1-Black.ttf") format("opentype");
+    src: url("../fonts/Formula1-Black.ttf") format("opentype");
 }
 
 @font-face {
     font-family: F1-Wide;
-    src: url("../assets/Formula1-Wide.ttf") format("opentype");
+    src: url("../fonts/Formula1-Wide.ttf") format("opentype");
 }
 
 #title {

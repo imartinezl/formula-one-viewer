@@ -35,7 +35,6 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
     },
     devtool: "inline-source-map",
     watch : true,
@@ -67,9 +66,7 @@ module.exports = {
                   {
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                      // you can specify a publicPath here
-                      // by default it uses publicPath in webpackOptions.output
-                      publicPath: '../',
+                      publicPath: './',
                       hmr: process.env.NODE_ENV === 'development',
                       reloadAll: true,
                     },
@@ -85,9 +82,13 @@ module.exports = {
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    'file-loader'
-                ]
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/'
+                    }
+                }]
             }
         ]
     }
