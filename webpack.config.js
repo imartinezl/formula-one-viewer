@@ -14,7 +14,7 @@ module.exports = {
         contentBase: './dist'
     },
     plugins: [        
-        new CleanWebpackPlugin(),
+        //new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
@@ -34,7 +34,7 @@ module.exports = {
     ],
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname), //path.resolve(__dirname, 'dist'),
     },
     devtool: "inline-source-map",
     watch : true,
@@ -66,7 +66,6 @@ module.exports = {
                   {
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                      publicPath: './',
                       hmr: process.env.NODE_ENV === 'development',
                       reloadAll: true,
                     },
