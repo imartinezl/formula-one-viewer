@@ -28,7 +28,6 @@ export default class Standings {
         this.races.map((race, index) => this.processRace(race, index));
         // fix empty drivers
         this.fillEmptyDrivers();
-        console.log(this.races.length)
         this.standingsChart.updateData(this.standings, this.labels);
     }
 
@@ -98,8 +97,6 @@ export default class Standings {
 
     fillEmptyDrivers(){
         var nraces = this.races.length;
-        console.log(nraces);
-
         for (var driverId in this.standings) {
             
             for (let index = 0; index < nraces; index++) {

@@ -19,12 +19,8 @@ export default class StandingsChart {
     }
     
     initEvents(){
-        this._resetZoom.addEventListener("click", () => {
-            if (this._chart) {
-                this._chart.resetZoom();
-                this.hideZoomButton();
-            }
-        });
+        this._resetZoom.addEventListener("click", this.resetZoomAction.bind(this));
+        this._canvas.addEventListener("dblclick", this.resetZoomAction.bind(this));
     }
     
     onZoomComplete(chart){
@@ -37,6 +33,13 @@ export default class StandingsChart {
     
     displayZoomButton(){
         this._resetZoom.style.display = 'block';
+    }
+
+    resetZoomAction(){
+        if (this._chart) {
+            this._chart.resetZoom();
+            this.hideZoomButton();
+        }
     }
 
     
@@ -160,6 +163,13 @@ export default class StandingsChart {
                     mode: 'xy',
                     speed: 0.05,
                     onZoomComplete: this.onZoomComplete.bind(this),
+                },
+                hover: {
+                    onHover: function(e) {
+                       var point = this.getElementAtEvent(e);
+                       if (point.length) e.target.style.cursor = 'default';
+                       else e.target.style.cursor = 'crosshair';
+                    }
                 },
 
             },
