@@ -12,7 +12,7 @@ export default class ErgastAPI {
     }
 
     createURL(season){
-        this.baseurl = 'http://ergast.com/api';
+        this.baseurl = 'https://ergast.com/api';
         let series = 'f1';
         //let season = '2019';
         let round = '';
