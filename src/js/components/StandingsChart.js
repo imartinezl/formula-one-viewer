@@ -68,7 +68,6 @@ export default class StandingsChart {
                 }
                 return color
             });
-            console.log(pointColors)
             datasets.push({
                 label: driverId,
                 data: standings[driverId].cumsum,
