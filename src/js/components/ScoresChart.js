@@ -54,6 +54,7 @@ export default class ScoresChart {
             borderWidth: 0,
             hoverBackgroundColor: "#ff5c58",
             barPercentage: 0.8,
+            minBarLength: 5,
 
 
         }];
@@ -73,13 +74,14 @@ export default class ScoresChart {
     onDragEnd(e, datasetIndex, index, value) {
         this._scores[index] = value;
         this._standings.updateScores(this._scores);
+        e.target.style.cursor = 'default';
     }
 
     onDragStart(e, datasetIndex, index, value) {
-
+        e.target.style.cursor = 'grabbing';
     }
     onDrag(e, datasetIndex, index, value) {
-
+        e.target.style.cursor = 'grabbing';
     }
 
     baseConfig() {
@@ -148,6 +150,17 @@ export default class ScoresChart {
                 },
                 tooltips: {
                     enabled: false,
+                },
+                hover: {
+                    onHover: function(e) {
+                       var point = this.getElementAtEvent(e);
+                       if (point.length) e.target.style.cursor = 'grab';
+                       else e.target.style.cursor = 'default';
+                    }
+                },
+                animation: {
+                    //duration: 1000,
+                    easing: 'easeInExpo',
                 }
             }
         }
