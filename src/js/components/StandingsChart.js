@@ -78,6 +78,15 @@ export default class StandingsChart {
         }
     }
 
+    onClick(e, activePoints){
+        if(this._chart && activePoints.length > 0){
+            let index = activePoints[0]._index
+            let url = this._chart.data.labels_metadata[index].url
+            console.log(url)
+            Object.assign(document.createElement('a'), { target: '_blank', href: url}).click();
+            //var win = window.open(url, '_blank');
+        }
+    }
 
     baseConfig() {
         var config = {
@@ -207,14 +216,12 @@ export default class StandingsChart {
                     },
                     onZoomComplete: this.onZoomComplete.bind(this),
                 },
-                hover: {
-                    onHover: function(e) {
-                       var point = this.getElementAtEvent(e);
-                       if (point.length) e.target.style.cursor = 'default';
-                       else e.target.style.cursor = 'crosshair';
-                    }
+                onHover: function(e) {
+                    var point = this.getElementAtEvent(e);
+                    if (point.length) e.target.style.cursor = 'default';
+                    else e.target.style.cursor = 'crosshair';
                 },
-
+                onClick: this.onClick.bind(this)
             },
         };
         return config;
