@@ -44,7 +44,8 @@ export default class Standings {
 
     processRace(race, index){
         race.Results.map( e => this.processPosition(e, index));
-        this.processRaceInfo(race)
+        this.fillAbsentDrivers(index);
+        this.processRaceInfo(race);
     }
     processPosition(result, index){
         let points = this.calculatePoints(result);
@@ -52,7 +53,7 @@ export default class Standings {
         let constructorId = result.Constructor.constructorId;
         this.initDriver(driverId);
         this.addPoints(driverId, constructorId, points, index);
-        this.driverMetadata(result);
+        this.driverMetadata(result, index);
     }
     
     initDriver(driverId){
@@ -128,7 +129,7 @@ export default class Standings {
 
     }
 
-    driverMetadata(result){
+    driverMetadata(result, index){
         let driverId = result.Driver.driverId;
         if(!this.standings_metadata[driverId]){
             this.standings_metadata[driverId] = {};
@@ -136,9 +137,24 @@ export default class Standings {
             this.standings_metadata[driverId].dateOfBirth = result.Driver.dateOfBirth || '';
             this.standings_metadata[driverId].name = result.Driver.givenName + ' ' + result.Driver.familyName
             this.standings_metadata[driverId].number = result.Driver.permanentNumber || '';
-            this.standings_metadata[driverId].position = result.position || '';
-            this.standings_metadata[driverId].grid = result.grid || '';
             this.standings_metadata[driverId].constructor = result.Constructor.name || '';
+            this.standings_metadata[driverId].position = [];
+            this.standings_metadata[driverId].grid = [];
+            for(let i = 0; i<index; i++){
+                this.standings_metadata[driverId].position.push('');
+                this.standings_metadata[driverId].grid.push('');
+            }
+        }
+        this.standings_metadata[driverId].position.push(result.position || '');
+        this.standings_metadata[driverId].grid.push(result.grid || '');
+        
+    }
+    fillAbsentDrivers(index){
+        for(let driverId in this.standings_metadata){
+            if(this.standings_metadata[driverId].position.length < index+1){
+                this.standings_metadata[driverId].position.push('');
+                this.standings_metadata[driverId].grid.push('');
+            }
         }
     }
 }
