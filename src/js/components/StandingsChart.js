@@ -225,7 +225,7 @@ export default class StandingsChart {
                 zoom: {
                     enabled: true,
                     drag: true,
-                    mode: 'xy',
+                    mode: 'y',
                     speed: 0.05,
                     drag: {
                         borderColor: 'rgba(0,0,0,0.5)',
