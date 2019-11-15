@@ -42,6 +42,14 @@ export default class StandingsChart {
         }
     }
 
+    getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
     
 
     updateData(standings, labels, standings_metadata, labels_metadata) {
@@ -52,7 +60,15 @@ export default class StandingsChart {
             let constructors = standings[driverId].constructorId;
             let currentConstructor = [...constructors].pop();
             let lineColor = config.constructorColor[currentConstructor];
-            let pointColors = constructors.map(e => config.constructorColor[e])
+            let randomColor = this.getRandomColor();
+            let pointColors = constructors.map(e => {
+                let color = config.constructorColor[e];
+                if(color === "#------"){
+                    color = randomColor;
+                }
+                return color
+            });
+            console.log(pointColors)
             datasets.push({
                 label: driverId,
                 data: standings[driverId].cumsum,
@@ -182,7 +198,11 @@ export default class StandingsChart {
                             let point = data.datasets_metadata[item.datasetIndex];
                             let label = data.labels_metadata[item.index];
                             // console.log('footer:', point, label, item)
-                            return '   ' + point.constructor + ' # ' + point.number
+                            let text = '   ' + point.constructor;
+                            if(point.number !== ''){
+                                text += ' #' + point.number;
+                            }
+                            return text;
                         },
                         footer: function (tooltipItem, data) {
                             let item = tooltipItem[0];
@@ -221,7 +241,11 @@ export default class StandingsChart {
                     if (point.length) e.target.style.cursor = 'default';
                     else e.target.style.cursor = 'crosshair';
                 },
-                onClick: this.onClick.bind(this)
+                onClick: this.onClick.bind(this),
+                animation: {
+                    // duration: 500,
+                    // easing: 'easeInExpo',
+                }
             },
         };
         return config;
