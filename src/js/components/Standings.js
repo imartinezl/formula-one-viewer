@@ -20,7 +20,9 @@ export default class Standings {
 
     reset(){
         this.labels = [];
+        this.labels_metadata = [];
         this.standings = {};
+        this.standings_metadata = {}
     }
 
     update(){
@@ -28,7 +30,7 @@ export default class Standings {
         this.races.map((race, index) => this.processRace(race, index));
         // fix empty drivers
         this.fillEmptyDrivers();
-        this.standingsChart.updateData(this.standings, this.labels);
+        this.standingsChart.updateData(this.standings, this.labels, this.standings_metadata, this.labels_metadata);
     }
 
     updateScores(s){
@@ -42,7 +44,7 @@ export default class Standings {
 
     processRace(race, index){
         race.Results.map( e => this.processPosition(e, index));
-        this.labels.push(this.getRaceLabel(race.Circuit));
+        this.processRaceInfo(race)
     }
     processPosition(result, index){
         let points = this.calculatePoints(result);
@@ -50,7 +52,7 @@ export default class Standings {
         let constructorId = result.Constructor.constructorId;
         this.initDriver(driverId);
         this.addPoints(driverId, constructorId, points, index);
-        
+        this.driverMetadata(result);
     }
     
     initDriver(driverId){
@@ -72,6 +74,7 @@ export default class Standings {
         this.standings[driverId].cumsum.push(this.standings[driverId].total);
         this.standings[driverId].perRace.push(points);
     }
+
     calculatePoints(result){
         let pos = parseInt(result.position);
         let points = 0;
@@ -85,10 +88,18 @@ export default class Standings {
         }
         return points;
     }
-    getRaceLabel(raceCircuit){
-        let raceLocationCountry = raceCircuit.Location.country;
+
+    processRaceInfo(race){
+        let raceLocationCountry = race.Circuit.Location.country;
         let emoji = flag(raceLocationCountry);
-        return [raceLocationCountry, emoji];
+        this.labels.push([raceLocationCountry, emoji].join(' '));
+        this.labels_metadata.push({
+            raceName: race.raceName, 
+            round: race.round,
+            season: race.season,
+            flag: emoji,
+            url: race.url
+        });
     }
 
     pushLast(x){
@@ -115,5 +126,19 @@ export default class Standings {
 
         }
 
+    }
+
+    driverMetadata(result){
+        let driverId = result.Driver.driverId;
+        if(!this.standings_metadata[driverId]){
+            this.standings_metadata[driverId] = {};
+            this.standings_metadata[driverId].code = result.Driver.code || '';
+            this.standings_metadata[driverId].dateOfBirth = result.Driver.dateOfBirth || '';
+            this.standings_metadata[driverId].name = result.Driver.givenName + ' ' + result.Driver.familyName
+            this.standings_metadata[driverId].number = result.Driver.permanentNumber || '';
+            this.standings_metadata[driverId].position = result.position || '';
+            this.standings_metadata[driverId].grid = result.grid || '';
+            this.standings_metadata[driverId].constructor = result.Constructor.name || '';
+        }
     }
 }
