@@ -26,14 +26,12 @@
                 </nav>
             </div>
         </section>
-        <div class="container">
-        </div>
         <div class="container is-fluid">
             <div class="columns is-mobile is-vcentered">
                 <div class="column">
                     <div class="box">
                         <div class="level-left">
-                            <p class="level-item">Scoring System</p>
+                            <h2 class="level-item">Scoring System</h2>
                             <div class="select is-danger is-rounded is-small">
                                 <select id="select-system"></select>
                             </div>
@@ -42,11 +40,13 @@
                             <canvas id="points_canvas"></canvas>
                         </div>
                     </div>
+                    <p><strong>Drag any bar</strong> to customize the points given to each position.</p>
+                    <p>&nbsp;</p>
                 </div>
                 <div class="column">
                     <div class="box">
                         <div class="level-left">
-                            <p class="level-item">F1 Season</p>
+                            <h2 class="level-item">F1 Season</h2>
                             <div class="select is-danger is-rounded is-small">
                                 <select id="select-year"></select>
                             </div>
@@ -59,16 +59,18 @@
                             <canvas id="standings_canvas"></canvas>
                         </div>
                     </div>
+                    <p><strong>Hover over any point</strong> to information about the driver and car constructor.</p>
+                <p><strong>Click any point</strong> to get more information about any race.</p>
                 </div>
             </div>
-            <div class="tags">
+            <!-- <div class="tags">
                 <span class="tag is-rounded is-dark">F1</span>
                 <span class="tag is-rounded is-dark">Standings</span>
                 <span class="tag is-rounded is-dark">Ranking</span>
                 <span class="tag is-rounded is-dark">History</span>
+            </div> -->
+
             </div>
-            <h2 id="subtitle">Drag the bars to customize the points given to each position</h2>
-        </div>
 
 
     </div>
