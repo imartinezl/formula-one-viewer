@@ -41,9 +41,9 @@ body,
 
 #title {
     font-family: 'F1-Bold', 'Roboto', sans-serif;
-    font-size: 18pt;
+    font-size: 17pt;
     color: #ffffff;
-    padding-top: 15pt;
+    padding-top: 12pt;
 }
 
 #subtitle {
@@ -52,9 +52,9 @@ body,
     margin-bottom: 10pt;
 }
 
-#logo {
+#logo { 
     padding-right: 10pt;
-    width: 200px;
+    width: 150px;
 }
 #github-button {
     width: 32px;
@@ -91,9 +91,14 @@ body,
   100% { opacity: 1 }
 }
 
-p{
+h2{
     font-family: 'F1-Bold', 'Roboto', sans-serif;
     font-size: 10pt;
+}
+
+p{
+    font-family: 'F1-Regular', 'Roboto', sans-serif;
+    font-size: 9pt;
 }
 
 .tags{
@@ -106,7 +111,7 @@ p{
 .hero-body {
     background-color: #e10600;
     background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff8f8' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
-    padding-top: 20pt;
-    padding-bottom: 20pt;
+    padding-top: 15pt;
+    padding-bottom: 15pt;
     margin-bottom: 10pt;
 }
