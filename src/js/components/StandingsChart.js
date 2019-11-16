@@ -208,8 +208,8 @@ export default class StandingsChart {
                             let point = data.datasets_metadata[item.datasetIndex];
                             let label = data.labels_metadata[item.index];
                             // console.log('title:', point, label, item)
-                            let race_info = label.flag + '    ' + label.raceName + ' R' + label.round;
-                            let result_info = '🏁    Grid: P' + point.grid[item.index] + ' | Finish: P' + point.position[item.index];
+                            let race_info = label.flag + '  ' + label.raceName + ' R' + label.round;
+                            let result_info = '🏁  Grid: P' + point.grid[item.index] + ' | Finish: P' + point.position[item.index];
                             if(tooltipItem.length > 1 || point.grid[item.index] === '' || point.position[item.index] === ''){
                                 return race_info
                             }else{
