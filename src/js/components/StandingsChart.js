@@ -117,7 +117,7 @@ export default class StandingsChart {
                 scales: {
                     xAxes: [{
                         scaleLabel: {
-                            display: true,
+                            display: false,
                             labelString: 'Grand Prix',
                             fontFamily: 'F1-Regular',
                             fontSize: 12
@@ -210,7 +210,7 @@ export default class StandingsChart {
                             // console.log('title:', point, label, item)
                             let race_info = label.flag + '    ' + label.raceName + ' R' + label.round;
                             let result_info = '🏁    Grid: P' + point.grid[item.index] + ' | Finish: P' + point.position[item.index];
-                            if(tooltipItem.length > 1){
+                            if(tooltipItem.length > 1 || point.grid[item.index] === '' || point.position[item.index] !== ''){
                                 return race_info
                             }else{
                                 return [race_info, result_info]
@@ -237,7 +237,7 @@ export default class StandingsChart {
                 },
                 onHover: function(e) {
                     var point = this.getElementAtEvent(e);
-                    if (point.length) e.target.style.cursor = 'default';
+                    if (point.length) e.target.style.cursor = 'pointer';
                     else e.target.style.cursor = 'crosshair';
                 },
                 onClick: this.onClick.bind(this),
