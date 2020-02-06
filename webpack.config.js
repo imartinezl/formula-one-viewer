@@ -3,27 +3,25 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: [
         './src/js/app.js'
     ],
     devServer: {
         contentBase: './dist'
     },
-    plugins: [        
+    plugins: [
         //new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new CopyWebpackPlugin([
-            {
-                from: 'src/assets',
-                to: 'assets'
-            }
-        ],{
+        new CopyWebpackPlugin([{
+            from: 'src/assets',
+            to: 'assets'
+        }], {
             copyUnmodified: true
         }),
         new MiniCssExtractPlugin({
@@ -31,15 +29,18 @@ module.exports = {
             chunkFilename: 'all',
             ignoreOrder: false,
         }),
+        // new BundleAnalyzerPlugin({
+        //     analyzerMode: 'static'
+        // }),
     ],
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname), //path.resolve(__dirname, 'dist'),
     },
     devtool: "inline-source-map",
-    watch : true,
-    watchOptions : {
-        ignored : ['node_modules','assets']
+    watch: true,
+    watchOptions: {
+        ignored: ['node_modules', 'assets']
     },
     module: {
         rules: [
@@ -53,30 +54,29 @@ module.exports = {
                 test: /\.m?js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env'],
-                    plugins: ['@babel/plugin-proposal-class-properties'] // used for ES6 new class properties
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                        plugins: ['@babel/plugin-proposal-class-properties'] // used for ES6 new class properties
                     }
                 }
             },
             {
                 test: /\.css$/,
-                use: [
-                  {
-                    loader: MiniCssExtractPlugin.loader,
-                    options: {
-                      hmr: process.env.NODE_ENV === 'development',
-                      reloadAll: true,
+                use: [{
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: process.env.NODE_ENV === 'development',
+                            reloadAll: true,
+                        },
                     },
-                  },
-                  'css-loader',
+                    'css-loader',
                 ],
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
-                  'file-loader'
+                    'file-loader'
                 ]
             },
             {
